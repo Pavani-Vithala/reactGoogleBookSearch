@@ -1,17 +1,31 @@
 import React from "react";
 
-function Nav() {
+function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-    <h1>Google Book Search</h1>
-      <a className="navbar-brand" href="/">
-        Search
-      </a>
-      <a className="navbar-brand" href="/Savedbooks">
+      <ul style={{ "listStyleType": "none"}}>
+     <li>
+       <img src= "../images/bookstack.jpg" alt="Book"></img>
+     </li>
+      <li>
+      <h3>Google Books</h3>
+      </li>
+      <li className="nav-item">
+        <a href="/Searchbooks" className={window.location.pathname === "/Searchbooks" ? "nav-link active" : "nav-link"}>
+         Search
+        </a>
+      </li>
+      <li className="nav-item">
+        <a href="/Savedbooks" className={window.location.pathname === "/Savedbooks" ? "nav-link active" : "nav-link"}>
         Saved
-      </a>
+        </a>
+      </li>
+      
+      </ul>
     </nav>
   );
 }
 
-export default Nav;
+export default Navbar;
+
+

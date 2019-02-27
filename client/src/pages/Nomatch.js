@@ -1,11 +1,11 @@
 import React from "react";
 import Jumbotron from "../components/Jumbotron";
 
-function NoMatch() {
+function Nomatch() {
   return (
     <div>
-      <Row>
-        <Col size="md-12">
+      <row>
+        <col size="md-12">
           <Jumbotron>
             <h1>404 Page Not Found</h1>
             <h1>
@@ -14,10 +14,10 @@ function NoMatch() {
               </span>
             </h1>
           </Jumbotron>
-        </Col>
-      </Row>
+        </col>
+      </row>
     </div>
   );
 }
 
-export default NoMatch;
+export default Nomatch;
