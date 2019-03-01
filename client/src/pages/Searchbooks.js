@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-//import Resultscontainer from "../components/Resultscontainer";
+import Resultscontainer from "../components/Resultscontainer";
 
 
 class Searchbooks extends Component {
   // Setting our component's initial state
   state = {
-    books: {
-      title: "",
-      author: "",
-      Description:"",
-      Link:"",
-      ImageLink:""
-    },
-    
-    synopsis: "",
+    books : [],
     SearchBook: "",
-    results: []
+    //results: []
   };
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -42,23 +34,33 @@ class Searchbooks extends Component {
         }
         var result = res.data.items;
         console.log(result);
-        //var book = [];
+        var book = [];
         for (var i = 0; i < result.length; i++) {
-          //console.log("Entered For loop:");
+          var temp ={};
+          var id = result[i].id;
+          var Link = result[i].selfLink;
+         // console.log(Link);
+          var Desc1 = result[i].searchInfo["textSnippet"];
+          //console.log(Desc1);
           var title1 = result[i].volumeInfo["title"];
           //console.log("Title is" + title1);
           var author1 = result[i].volumeInfo.authors[0];
-         // console.log("author is" + author1);
+          //console.log("author is" + author1);
           var image1 = result[i].volumeInfo.imageLinks["thumbnail"];
-          //console.log("image link is" +  image1);
-          var Desc1 = result[i].searchinfo["textSnippet"];
-          //console.log("Description is" + Desc1);
-          var Link = result[i].selfLink;
-          //console.log("Link is" + Link);
-          this.setState({books:{title:title1,author:author1,Description:Desc1,Link:Link,ImageLink:image1}
-          })
+         // console.log("image link is" +  image1);
+          temp.id = id;
+          temp.title = title1;
+          temp.author = author1;
+          temp.imagelink = image1;
+          temp.description = Desc1;
+          temp.bookLink = Link;
+          book.push(temp);
+          //book.push({"title": title1},{"author": author1},{"imageLink": image1},{"description": Desc1},{"bookLink": Link});
+          // console.log("Pushed into book array");
+         // console.log(book[i]);
         }
-        console.log(this.state.books["title"]);
+        this.setState({books:book});
+        console.log(this.state.books);
         //this.setState({ books: res.data, error: "" });
         // this.setState({results:this.state.books.items});
         //console.log(this.state.results);
@@ -67,9 +69,6 @@ class Searchbooks extends Component {
       })
       .catch(err => this.setState({ error: err.message }));
   };
-
-
-
 
 
   render() {
@@ -89,6 +88,7 @@ class Searchbooks extends Component {
 
         </div>
 
+        <Resultscontainer results={this.state.books} />
 
       </div>
 

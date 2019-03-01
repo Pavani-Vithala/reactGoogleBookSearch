@@ -11,7 +11,8 @@ body {
 }
 
 a{
-  color:black;
+  color:rgb(224, 159, 159);
+  
 }
 
 li{
@@ -36,10 +37,7 @@ img{
 h3{
   margin:10px;
 }
-button{
-  margin:10px;
-float: right;
-}
+
 .form-control{
   border-style:solid;
   border-width: 2px;
@@ -49,4 +47,7 @@ float: right;
   border-style:inset;
   border-color:black;
   border-width: 3px;
+  margin:10px;
+  float: right;
 }
+
