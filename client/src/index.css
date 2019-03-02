@@ -17,6 +17,7 @@ a{
 
 li{
   display:inline-block;
+  width:100%;
 }
 .Container{
   border-style:solid;

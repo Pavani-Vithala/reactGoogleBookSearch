@@ -38,8 +38,7 @@ class Searchbooks extends Component {
         for (var i = 0; i < result.length; i++) {
           var temp ={};
           var id = result[i].id;
-          var Link = result[i].selfLink;
-         // console.log(Link);
+          
           var Desc1 = result[i].searchInfo["textSnippet"];
           //console.log(Desc1);
           var title1 = result[i].volumeInfo["title"];
@@ -48,6 +47,8 @@ class Searchbooks extends Component {
           //console.log("author is" + author1);
           var image1 = result[i].volumeInfo.imageLinks["thumbnail"];
          // console.log("image link is" +  image1);
+         var Link = result[i].volumeInfo["previewLink"];
+         console.log(Link);
           temp.id = id;
           temp.title = title1;
           temp.author = author1;
