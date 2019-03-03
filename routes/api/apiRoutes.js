@@ -1,12 +1,17 @@
-/*const axios = require("axios");
 const router = require("express").Router();
+const booksController = require("../../controllers/booksController");
 
-router.get("/api/Searchbooks", (req, res) => {
-  axios
-    .get("http://www.recipepuppy.com/api/", { params: req.query })
-    .then(({ data: { results } }) => res.json(results))
-    .catch(err => res.status(422).json(err));
-});
+// Matches with "/api/books"
+router.route("/api/Save")
+  //.get(booksController.findAll)
+  .post(booksController.create);
+console.log("Hit the Save book route:");
+// Matches with "/api/books/:id"
+/*router
+  .route("/:id")
+  .get(booksController.findById)
+  .put(booksController.update)
+  .delete(booksController.remove);*/
 
-module.exports = router;*/
+module.exports = router;
 

@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 app.use(logger("dev"));
 // Connect to the Mongo DB
-//mongoose.connect(process.env.MONGODB_URI || "mongodb://Pavani:Abhi2012@ds349455.mlab.com:49455/googlebooks" , {useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://Pavani:Abhi2012@ds161008.mlab.com:61008/googlebooks" , {useNewUrlParser: true });
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
