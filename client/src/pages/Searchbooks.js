@@ -44,12 +44,14 @@ class Searchbooks extends Component {
           let author1 = result[i].volumeInfo.authors[0];
           let image1 = result[i].volumeInfo.imageLinks["thumbnail"];
           let Link = result[i].volumeInfo["previewLink"];
-          temp.id = id;
+          temp.book_id = id;
           temp.title = title1;
           temp.author = author1;
-          temp.imageLink = image1;
           temp.description = Desc1;
-          temp.bookLink = Link;
+          temp.link = Link;
+          temp.picture = image1;
+          
+          
           book.push(temp);
          
         }
