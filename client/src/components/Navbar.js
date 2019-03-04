@@ -11,12 +11,12 @@ function Navbar() {
       <h3>Google Books</h3>
       </li>
       <li className="nav-item">
-        <a href="/Searchbooks" className={window.location.pathname === "/Searchbooks" ? "nav-link active" : "nav-link"}>
+        <a href="/Search" className={window.location.pathname === "/Searchbooks" ? "nav-link active" : "nav-link"}>
          Search
         </a>
       </li>
       <li className="nav-item">
-        <a href="/Savedbooks" className={window.location.pathname === "/Savedbooks" ? "nav-link active" : "nav-link"}>
+        <a href="/Saved" className={window.location.pathname === "/Savebooks" ? "nav-link active" : "nav-link"}>
         Saved
         </a>
       </li>
