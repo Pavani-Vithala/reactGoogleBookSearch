@@ -1,4 +1,5 @@
 import React from "react";
+import API from "../utils/API";
 
 
 function SavedBooks(props) {
@@ -28,8 +29,15 @@ function SavedBooks(props) {
     function DeleteBookInfo(e,id)
     {
         let book_id = id;
-        console.log("The id of the book to delete is:" + book_id);
-    }
+        API.deleteBook(book_id).then(function (data) {
+            if (data.status === "error") {
+                throw new Error(data.message);
+            }
+            window.location.reload();
+
+               
+    });
+}
 }
 
 

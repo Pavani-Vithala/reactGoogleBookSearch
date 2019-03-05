@@ -25,14 +25,17 @@ function ResultsContainer(props) {
         </ul>
     );
     function saveBookInfo(event, bookdata) {
-        //let id = event.target.id;
+        let id = event.target.id;
         let bookToSave = bookdata;
         console.log(bookToSave);
         API.saveBook(bookToSave).then(function (data) {
             if (data.status === "error") {
+                alert("Book already saved:");
+               // $("#"+id).disable();
                 throw new Error(data.message);
+               
             }
-            console.log(data);
+           // window.location.reload();
 
                
     });
