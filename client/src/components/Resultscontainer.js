@@ -25,7 +25,7 @@ function ResultsContainer(props) {
         </ul>
     );
     function saveBookInfo(event, bookdata) {
-        let id = event.target.id;
+       // let id = event.target.id;
         let bookToSave = bookdata;
         console.log(bookToSave);
         API.saveBook(bookToSave).then(function (data) {
