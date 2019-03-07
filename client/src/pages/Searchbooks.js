@@ -9,7 +9,7 @@ class Searchbooks extends Component {
   state = {
     books : [],
     SearchBook: "",
-    //results: []
+    SavedBooks: []
   };
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -20,25 +20,64 @@ class Searchbooks extends Component {
     this.setState({
       [name]: value
     });
+       API.getBook().then(res => {
+      if(res.data.status === "error"){
+        throw new Error(res.data.message);
+        }
+        //console.log("Displaying saved books");
+        this.setState({SavedBooks:res.data});
+    }).catch(err => this.setState({ error: err.message }));
+  
     
   };
+
+  
 
 
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
     event.preventDefault();
+ 
     API.searchBooks(this.state.SearchBook)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
+
         var result = res.data.items;
-        console.log(result);
+        //console.log(result);
         let book = [];
+        let SavedBookId1 = [];
+        var saved = 0;
+        
+        for(var j=0;j<this.state.SavedBooks.length;j++)
+        {
+          SavedBookId1.push(this.state.SavedBooks[j].book_id);
+        }
+        console.log(SavedBookId1);
+        
         for (var i = 0; i < result.length; i++) {
           let temp ={};
           let id = result[i].id;
-          
+          for(j=0;j<SavedBookId1.length;j++)
+          {
+            console.log(SavedBookId1[j]);
+            console.log("id is" + id);
+            if (SavedBookId1[j] === id)
+            {
+                saved = 1;
+                break;
+            }
+            else
+            {
+              saved = 0;
+            }
+            
+          }
+          console.log("The value of Saved is" + saved);
+          if (saved !== 1)
+          {
+            console.log("Entered if construct:");
           let Desc1 = result[i].searchInfo["textSnippet"];
           let title1 = result[i].volumeInfo["title"];
           let author1 = result[i].volumeInfo.authors[0];
@@ -49,14 +88,14 @@ class Searchbooks extends Component {
           temp.author = author1;
           temp.description = Desc1;
           temp.link = Link;
-          temp.picture = image1;
-          
-          
+          temp.picture = image1;            
           book.push(temp);
+          }
          
         }
+
         this.setState({books:book});
-        console.log(this.state.books);
+        //console.log(this.state.books);
        
       })
       .catch(err => this.setState({ error: err.message }));
@@ -86,6 +125,7 @@ class Searchbooks extends Component {
 
     );
   }
+  
 };
 
 export default Searchbooks;
