@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import API from "../utils/API";
 
 function ResultsContainer(props) {
@@ -25,7 +25,7 @@ function ResultsContainer(props) {
         </ul>
     );
     function saveBookInfo(event, bookdata) {
-        //let id = event.target.id;
+        let id = event.target.id;
         let bookToSave = bookdata;
         console.log(bookToSave);
         API.saveBook(bookToSave).then(function (data) {
@@ -35,7 +35,7 @@ function ResultsContainer(props) {
                 throw new Error(data.message);
                
             }
-           this.disable();
+            
 
                
     });
