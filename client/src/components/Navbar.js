@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 function Navbar() {
   return (
@@ -11,14 +13,30 @@ function Navbar() {
       <h3>Google Books</h3>
       </li>
       <li className="nav-item">
-        <a href="/Search" className={window.location.pathname === "/Searchbooks" ? "nav-link active" : "nav-link"}>
-         Search
-        </a>
+      
+      <Link
+              to="/"
+              className={
+                window.location.pathname === "/" || window.location.pathname === "/Search"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Search
+            </Link>
       </li>
       <li className="nav-item">
-        <a href="/Saved" className={window.location.pathname === "/Savebooks" ? "nav-link active" : "nav-link"}>
-        Saved
-        </a>
+      <Link
+              to="/Saved"
+              className={
+                window.location.pathname === "/Saved" || window.location.pathname === "/Saved"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Saved
+            </Link>
+        
       </li>
       
       </ul>
