@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../utils/API";
-//huhkjjkllkl
+
 
 function SavedBooks(props) {
     return (
@@ -33,13 +33,10 @@ function SavedBooks(props) {
             if (data.status === "error") {
                 throw new Error(data.message);
             }
-            window.location.reload();
-
-               
-    });
+        });
+       window.location = "/Saved";
 }
 }
-
 
 
 export default SavedBooks;
