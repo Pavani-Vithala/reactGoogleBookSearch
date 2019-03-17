@@ -7,15 +7,29 @@ import API from "../utils/API";
 class SaveBooks extends Component {
   state = {
     books: [],
-   // SavedBooks: []
+    SavedBooks: []
     // author: "",
     //description: "",
     //image: "",
     // link: ""
   };
-
-
   componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBook().then(res => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      //console.log("Displaying saved books");
+      this.setState({ books: res.data });
+    }).catch(err => this.setState({ error: err.message }));
+  };
+
+
+
+ /* componentDidMount() {
     API.getBook().then(res => {
       if (res.data.status === "error") {
         throw new Error(res.data.message);
@@ -25,7 +39,7 @@ class SaveBooks extends Component {
     }).catch(err => this.setState({ error: err.message }));
 
 
-  }
+  }*/
 
   handleDelete = (event) => {
     event.preventDefault();
@@ -34,20 +48,22 @@ class SaveBooks extends Component {
     API.deleteBook(book_id).then(function (data) {
       if (data.status === "error") {
         throw new Error(data.message);
-      } else {
-        console.log("Deleted the book successfully:"+ book_id);
-         API.getBook().then(res => {
-           if (res.data.status === "error") {
-             throw new Error(res.data.message);
+      } 
+    
+      console.log("Deleted the book successfully:"+ book_id);
+         API.getBook().then(function (data) {
+           if (data.status === "error") {
+             throw new Error(data.message);
            }
-        //console.log(this.state.SavedBooks);
-        this.setState({ books: res.data });
+        this.setState({ SavedBooks: data });
+        console.log(this.state.SavedBooks);
         }).catch(err => console.log(err));
-       //this.setState({books: this.state.SavedBooks});
-
-      }
-
+       //this.setState({books: this.state.SavedBooks});*/
+      //
+      // this.loadBooks();
+      
     });
+    this.setState({books:this.state.SavedBooks});
   };
 
   render() {
