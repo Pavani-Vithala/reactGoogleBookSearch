@@ -29,16 +29,7 @@ function SavedBooks(props) {
     );
 }
 
-/*DeleteBookInfo = (e, id) => {
-    let book_id = id;
-    API.deleteBook(book_id).then(function (data) {
-        if (data.status === "error") {
-            throw new Error(data.message);
-        }
-        //this.setstate({ deleteFlag: 1 });
-    });
 
-}*/
 
 
 

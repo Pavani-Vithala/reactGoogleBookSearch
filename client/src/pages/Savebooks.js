@@ -6,12 +6,7 @@ import API from "../utils/API";
 
 class SaveBooks extends Component {
   state = {
-    books: [],
-    SavedBooks: []
-    // author: "",
-    //description: "",
-    //image: "",
-    // link: ""
+    books: []
   };
   componentDidMount() {
     this.loadBooks();
@@ -27,43 +22,19 @@ class SaveBooks extends Component {
     }).catch(err => this.setState({ error: err.message }));
   };
 
-
-
- /* componentDidMount() {
-    API.getBook().then(res => {
+  handleDelete = (event) => {
+    event.preventDefault();
+    let book_id = event.target.id;
+    API.deleteBook(book_id).then(res => {
       if (res.data.status === "error") {
         throw new Error(res.data.message);
       }
-      //console.log("Displaying saved books");
-      this.setState({ books: res.data });
-    }).catch(err => this.setState({ error: err.message }));
+      // console.log("Deleted the book successfully:"+ book_id);
 
+      this.loadBooks();
 
-  }*/
-
-  handleDelete = (event) => {
-    event.preventDefault();
-   // this.setState({ SavedBooks: this.state.books });
-    let book_id = event.target.id;
-    API.deleteBook(book_id).then(function (data) {
-      if (data.status === "error") {
-        throw new Error(data.message);
-      } 
-    
-      console.log("Deleted the book successfully:"+ book_id);
-         API.getBook().then(function (data) {
-           if (data.status === "error") {
-             throw new Error(data.message);
-           }
-        this.setState({ SavedBooks: data });
-        console.log(this.state.SavedBooks);
-        }).catch(err => console.log(err));
-       //this.setState({books: this.state.SavedBooks});*/
-      //
-      // this.loadBooks();
-      
     });
-    this.setState({books:this.state.SavedBooks});
+
   };
 
   render() {

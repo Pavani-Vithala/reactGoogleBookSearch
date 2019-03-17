@@ -9,7 +9,8 @@ class Searchbooks extends Component {
   state = {
     books : [],
     SearchBook: "",
-    SavedBooks: []
+    SavedBooks: [],
+    bookToSave:[]
   };
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -30,7 +31,15 @@ class Searchbooks extends Component {
   
     
   };
-
+  /*loadBooks = () => {
+    API.getBook().then(res => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      //console.log("Displaying saved books");
+      this.setState({ books: res.data });
+    }).catch(err => this.setState({ error: err.message }));
+  };*/
   
 
 
@@ -54,15 +63,15 @@ class Searchbooks extends Component {
         {
           SavedBookId1.push(this.state.SavedBooks[j].book_id);
         }
-        console.log(SavedBookId1);
+        //console.log(SavedBookId1);
         
         for (var i = 0; i < result.length; i++) {
           let temp ={};
           let id = result[i].id;
           for(j=0;j<SavedBookId1.length;j++)
           {
-            console.log(SavedBookId1[j]);
-            console.log("id is" + id);
+           // console.log(SavedBookId1[j]);
+           // console.log("id is" + id);
             if (SavedBookId1[j] === id)
             {
                 saved = 1;
@@ -74,10 +83,10 @@ class Searchbooks extends Component {
             }
             
           }
-          console.log("The value of Saved is" + saved);
+         // console.log("The value of Saved is" + saved);
           if (saved !== 1)
           {
-            console.log("Entered if construct:");
+           // console.log("Entered if construct:");
           let Desc1 = result[i].searchInfo["textSnippet"];
           let title1 = result[i].volumeInfo["title"];
           let author1 = result[i].volumeInfo.authors[0];
@@ -101,6 +110,28 @@ class Searchbooks extends Component {
       .catch(err => this.setState({ error: err.message }));
   };
 
+  /*handleSave = (event) => {
+    event.preventDefault();
+    let book_id = event.target.id;
+    
+    for (let i=0;i<this.state.books.length;i++)
+    {
+      if(book_id === this.state.books.book_id)
+          this.setState({bookToSave :this.state.books[i] })
+    }
+    API.saveBook(this.state.bookToSave).then(res => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+       console.log("Book Saved successfully:"+ this.state.bookToSave);
+
+     // this.loadBooks();
+
+    });
+
+  };*/
+
+
 
   render() {
     return (
@@ -119,7 +150,7 @@ class Searchbooks extends Component {
 
         </div>
 
-        <ResultsContainer results={this.state.books} />
+        <ResultsContainer results={this.state.books}/>
 
       </div>
 
