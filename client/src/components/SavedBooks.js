@@ -1,9 +1,11 @@
 import React from "react";
-import API from "../utils/API";
+//import API from "../utils/API";
 
 
 function SavedBooks(props) {
+
     return (
+
         <ul className="SavedBooks" style={{ borderStyle: "solid", borderWidth: 2, borderColor: "black" }}>
             {props.results.map((result, i) => {
 
@@ -17,7 +19,7 @@ function SavedBooks(props) {
                         <p style={{ alignContent: "center", fontSize: 20 }}>{description}</p>
                         <a href={link}><button className="btn btn-success"
                             style={{ margin: 10, float: "right", padding: 10 }}>View</button></a>
-                        <button className="btn btn-success" id={book_id} onClick={(event) => { DeleteBookInfo(event,book_id) }}
+                        <button className="btn btn-success" id={book_id} onClick={props.handleDelete }
                             style={{ margin: 10, float: "right", padding: 10 }}>Delete</button>
 
                     </li>
@@ -25,18 +27,19 @@ function SavedBooks(props) {
             })}
         </ul>
     );
+}
 
-    function DeleteBookInfo(e,id)
-    {
-        let book_id = id;
-        API.deleteBook(book_id).then(function (data) {
-            if (data.status === "error") {
-                throw new Error(data.message);
-            }
-        });
-       window.location = "/Saved";
-}
-}
+/*DeleteBookInfo = (e, id) => {
+    let book_id = id;
+    API.deleteBook(book_id).then(function (data) {
+        if (data.status === "error") {
+            throw new Error(data.message);
+        }
+        //this.setstate({ deleteFlag: 1 });
+    });
+
+}*/
+
 
 
 export default SavedBooks;

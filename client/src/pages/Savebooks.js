@@ -6,35 +6,63 @@ import API from "../utils/API";
 
 class SaveBooks extends Component {
   state = {
-    books: []
-    //title: "",
-   // author: "",
+    books: [],
+   // SavedBooks: []
+    // author: "",
     //description: "",
     //image: "",
-   // link: ""
+    // link: ""
   };
 
+
   componentDidMount() {
-    API.getBook()
-      .then(res =>
-        this.setState({ books: res.data})
-      )
-      .catch(err => console.log(err));
-   
+    API.getBook().then(res => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      //console.log("Displaying saved books");
+      this.setState({ books: res.data });
+    }).catch(err => this.setState({ error: err.message }));
+
+
   }
 
-   render() {
+  handleDelete = (event) => {
+    event.preventDefault();
+   // this.setState({ SavedBooks: this.state.books });
+    let book_id = event.target.id;
+    API.deleteBook(book_id).then(function (data) {
+      if (data.status === "error") {
+        throw new Error(data.message);
+      } else {
+        console.log("Deleted the book successfully:"+ book_id);
+         API.getBook().then(res => {
+           if (res.data.status === "error") {
+             throw new Error(res.data.message);
+           }
+        //console.log(this.state.SavedBooks);
+        this.setState({ books: res.data });
+        }).catch(err => console.log(err));
+       //this.setState({books: this.state.SavedBooks});
+
+      }
+
+    });
+  };
+
+  render() {
     return (
-      
-        <div className="main-content saved">
-          <Jumbotron />
-          <h3>Saved Books</h3>
-          <div className="book-info">
-            <SavedBooks results={this.state.books} />
-          </div>
+
+      <div className="main-content saved">
+        <Jumbotron />
+        <h3>Saved Books</h3>
+        <div className="book-info">
+          <SavedBooks results={this.state.books} handleDelete={this.handleDelete} />
         </div>
-     
+      </div>
+
     );
   }
+
 }
 export default SaveBooks;
