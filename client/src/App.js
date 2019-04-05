@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Searchbooks from "./pages/Searchbooks";
 import Savebooks from "./pages/Savebooks";
-//import Nomatch from "./pages/Nomatch";
 import Navbar from "./components/Navbar";
 
 function App(){
@@ -10,11 +9,11 @@ function App(){
       <Router>
         <div>
           <Navbar />
-         <Route exact path="/" component={Searchbooks} />
-        <Route exact path="/Search" component={Searchbooks} />
-        <Route exact path="/Saved" component={Savebooks} />
-        </div>
-        </Router>
+            <Route exact path="/" component={Searchbooks} />
+            <Route exact path="/Search" component={Searchbooks} />
+            <Route exact path="/Saved" component={Savebooks} />
+         </div>
+       </Router>
     );
   }
 

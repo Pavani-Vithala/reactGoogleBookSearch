@@ -1,7 +1,6 @@
 import React from "react";
-//import API from "../utils/API";
 
-
+//This is the component which is rendered to display the Saved Books
 function SavedBooks(props) {
 
     return (
@@ -19,7 +18,7 @@ function SavedBooks(props) {
                         <p style={{ alignContent: "center", fontSize: 20 }}>{description}</p>
                         <a href={link}><button className="btn btn-success"
                             style={{ margin: 10, float: "right", padding: 10 }}>View</button></a>
-                        <button className="btn btn-success" id={book_id} onClick={props.handleDelete }
+                        <button className="btn btn-success" id={book_id} onClick={props.handleDelete}
                             style={{ margin: 10, float: "right", padding: 10 }}>Delete</button>
 
                     </li>

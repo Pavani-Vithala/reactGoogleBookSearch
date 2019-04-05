@@ -8,7 +8,7 @@ class SaveBooks extends Component {
   state = {
     books: []
   };
-  componentDidMount() {
+    componentDidMount() {
     this.loadBooks();
   }
 
@@ -29,9 +29,7 @@ class SaveBooks extends Component {
       if (res.data.status === "error") {
         throw new Error(res.data.message);
       }
-      // console.log("Deleted the book successfully:"+ book_id);
-
-      this.loadBooks();
+        this.loadBooks();
 
     });
 

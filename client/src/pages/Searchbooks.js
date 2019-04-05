@@ -25,23 +25,13 @@ class Searchbooks extends Component {
       if(res.data.status === "error"){
         throw new Error(res.data.message);
         }
-        //console.log("Displaying saved books");
+        
         this.setState({SavedBooks:res.data});
     }).catch(err => this.setState({ error: err.message }));
   
     
   };
-  /*loadBooks = () => {
-    API.getBook().then(res => {
-      if (res.data.status === "error") {
-        throw new Error(res.data.message);
-      }
-      //console.log("Displaying saved books");
-      this.setState({ books: res.data });
-    }).catch(err => this.setState({ error: err.message }));
-  };*/
   
-
 
   handleFormSubmit = event => {
     // Preventing the default behavior of the form submit (which is to refresh the page)
@@ -54,7 +44,6 @@ class Searchbooks extends Component {
         }
 
         var result = res.data.items;
-        //console.log(result);
         let book = [];
         let SavedBookId1 = [];
         var saved = 0;
@@ -63,15 +52,13 @@ class Searchbooks extends Component {
         {
           SavedBookId1.push(this.state.SavedBooks[j].book_id);
         }
-        //console.log(SavedBookId1);
-        
+                
         for (var i = 0; i < result.length; i++) {
           let temp ={};
           let id = result[i].id;
           for(j=0;j<SavedBookId1.length;j++)
           {
-           // console.log(SavedBookId1[j]);
-           // console.log("id is" + id);
+           
             if (SavedBookId1[j] === id)
             {
                 saved = 1;
@@ -83,10 +70,10 @@ class Searchbooks extends Component {
             }
             
           }
-         // console.log("The value of Saved is" + saved);
+         
           if (saved !== 1)
           {
-           // console.log("Entered if construct:");
+           
           let Desc1 = result[i].searchInfo["textSnippet"];
           let title1 = result[i].volumeInfo["title"];
           let author1 = result[i].volumeInfo.authors[0];
@@ -104,35 +91,13 @@ class Searchbooks extends Component {
         }
 
         this.setState({books:book});
-        //console.log(this.state.books);
+        
        
       })
       .catch(err => this.setState({ error: err.message }));
   };
 
-  /*handleSave = (event) => {
-    event.preventDefault();
-    let book_id = event.target.id;
-    
-    for (let i=0;i<this.state.books.length;i++)
-    {
-      if(book_id === this.state.books.book_id)
-          this.setState({bookToSave :this.state.books[i] })
-    }
-    API.saveBook(this.state.bookToSave).then(res => {
-      if (res.data.status === "error") {
-        throw new Error(res.data.message);
-      }
-       console.log("Book Saved successfully:"+ this.state.bookToSave);
-
-     // this.loadBooks();
-
-    });
-
-  };*/
-
-
-
+  
   render() {
     return (
       <div>

@@ -1,5 +1,6 @@
-import React  from "react";
+import React from "react";
 import API from "../utils/API";
+//This is the component in which the results form the Book Search are displayed
 
 function ResultsContainer(props) {
     return (
@@ -25,21 +26,21 @@ function ResultsContainer(props) {
         </ul>
     );
     function saveBookInfo(event, bookdata) {
-       // let id = event.target.id;
+        // let id = event.target.id;
         let bookToSave = bookdata;
         console.log(bookToSave);
         API.saveBook(bookToSave).then(function (data) {
             if (data.status === "error") {
                 alert("Book already saved:");
-               // $("#"+id).disable();
+                // $("#"+id).disable();
                 throw new Error(data.message);
-               
-            }
-            
 
-               
-    });
-}
+            }
+
+
+
+        });
     }
+}
 
 export default ResultsContainer;
